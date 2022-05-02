@@ -33,21 +33,23 @@ namespace QuickSortAlgorithm
 
         private static int GetPivotIndex(int[] array, int minIndex, int maxIndex)
         {
-            int pivot = minIndex - 1;
+            int pivotIndendedPosition = minIndex;  
+            int pivotValue = array[maxIndex]; 
 
-            for (int i = minIndex; i <= maxIndex; i++)
+            for (int i = minIndex; i < maxIndex; i++)
             {
-                if (array[i] < array[maxIndex])
+                if (array[i] < pivotValue) 
                 {
-                    pivot++;
-                    Swap(ref array[pivot], ref array[i]);
+                    pivotIndendedPosition++;
+                    if (pivotIndendedPosition<=i) 
+                        Swap(ref array[pivotIndendedPosition-1], ref array[i]);
                 }
             }
 
-            pivot++;
-            Swap(ref array[pivot], ref array[maxIndex]);
-
-            return pivot;
+            
+            if (pivotIndendedPosition!=maxIndex)
+                Swap(ref array[pivotIndendedPosition], ref array[maxIndex]);
+            return pivotIndendedPosition;
         }
 
         private static void Swap(ref int leftItem, ref int rightItem)
